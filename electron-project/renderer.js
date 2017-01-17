@@ -45,7 +45,11 @@ var doWalk = function (host, community, oid) {
             } else {
                 var oid = item.oid;
                 var val = item.value;
-                var child = execFile('snmptranslate', [oid], (error, stdout, stderr) => {
+                var filename = 'snmptranslate';
+                    if ( process.platform == 'win32' ) {
+                        filename = './bin/snmptranslate.exe';
+                    }
+                var child = execFile(filename, [oid], (error, stdout, stderr) => {
                     var line;
                     if (error) {
                         line = oid + " = " + val;
@@ -107,7 +111,11 @@ var doGet = function (host, community, oid) {
                 } else {
                     var oid = item.oid;
                     var val = item.value;
-                    var child = execFile('snmptranslate', [oid], (error, stdout, stderr) => {
+                    var filename = 'snmptranslate';
+                    if ( process.platform == 'win32' ) {
+                        filename = './bin/snmptranslate.exe';
+                    }
+                    var child = execFile(filename, [oid], (error, stdout, stderr) => {
                         var line;
                         if (error) {
                             line = oid + " = " + val;
@@ -130,6 +138,7 @@ var doGet = function (host, community, oid) {
 }
 
 $(function () {
+    console.log("process.platform: "+process.platform);
     $("#selectMethod").change(function () {
         //alert("Handler for .change() called: "+this.value);
         if (this.value == "SNMPGET") {
@@ -146,11 +155,11 @@ $(function () {
         if (selectMethod == "SNMPWALK") {
             $("#cmdoutput").html("<p>Running SNMPWALK....</p>")
             $("#lSnmpwalk").addClass("is-loading");
-            doWalk($("#host").val(), $("#community").val(), $("#oid").val());
+            doWalk($("#host").val().trim(), $("#community").val().trim(), $("#oid").val().trim());
         } else if (selectMethod == "SNMPGET") {
             $("#cmdoutput").html("<p>Running SNMPGET....</p>")
             $("#lSnmpwalk").addClass("is-loading");
-            doGet($("#host").val(), $("#community").val(), $("#oid").val());
+            doGet($("#host").val().trim(), $("#community").val().trim(), $("#oid").val().trim());
         }
     });
 });
