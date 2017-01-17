@@ -1,0 +1,30 @@
+{
+  "name": "visual-snmp",
+  "version": "0.8.0",
+  "description": "Simple UI to some SNMP commands",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/sisraell/VisualSNMP",
+  "keywords": [
+    "SNMP",
+    "SNMPWALK",
+    "SNMPGET",
+    "Visual",
+    "UI"
+  ],
+  "author": "SysAid",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "jquery": "*",
+    "async" : "*",
+    "minimist": "*",
+    "net-snmp": "*",
+    "bulma": "*",
+    "htmlencode": "*"
+  }
+}

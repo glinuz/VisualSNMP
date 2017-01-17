@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="index.css">
+  <title>SNMP Tool</title>
+</head>
+
+<body>
+  <section class="section">
+    <h1 class="container title is-2 is-fluid">SNMP Tool</h1>
+    <p class="control is-grouped">
+      <span class="select">
+      <select id="selectMethod">
+        <option>SNMPWALK</option>
+        <option>SNMPGET</option>
+      </select>
+      </span>
+
+      <input id="host" class="input snmpfield" type="text" placeholder="Agent IP Address">
+      <input id="community" class="input snmpfield" type="text" placeholder="Community String" value="public">
+      <input id="oid" class="input snmpfield" type="text" placeholder="Root OID (optional)">
+      <a class="button is-primary" href="#" id="lSnmpwalk">Run</a>
+    </p>
+    <div class="container" id="cmdoutput">
+
+    </div>
+  </section>
+</body>
+<script>window.$ = window.jQuery = require('jquery');</script>
+<script>
+  require('./renderer.js')
+</script>
+
+</html>
