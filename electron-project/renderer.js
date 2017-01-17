@@ -2,6 +2,7 @@
 var snmp = require("net-snmp");
 var async = require("async");
 var htmlencode = require('htmlencode');
+var path = require('path');
 var execFile = require('child_process').execFile;
 
 var doWalk = function (host, community, oid) {
@@ -47,7 +48,9 @@ var doWalk = function (host, community, oid) {
                 var val = item.value;
                 var filename = 'snmptranslate';
                     if ( process.platform == 'win32' ) {
-                        filename = './bin/snmptranslate.exe';
+                        filename = path.join(__dirname, 'bin/snmptranslate.exe');
+                        //console.log("snmptranslate: "+filename);
+                        //filename = './bin/snmptranslate.exe';
                     }
                 var child = execFile(filename, [oid], (error, stdout, stderr) => {
                     var line;
@@ -113,7 +116,7 @@ var doGet = function (host, community, oid) {
                     var val = item.value;
                     var filename = 'snmptranslate';
                     if ( process.platform == 'win32' ) {
-                        filename = './bin/snmptranslate.exe';
+                        filename = path.join(__dirname, 'bin/snmptranslate.exe');
                     }
                     var child = execFile(filename, [oid], (error, stdout, stderr) => {
                         var line;
